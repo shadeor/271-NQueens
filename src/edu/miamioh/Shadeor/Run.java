@@ -273,18 +273,7 @@ public class Run extends JFrame{
 		notice1.setFont(new Font("Times New Romans", Font.PLAIN, 30));
 		JOptionPane.showMessageDialog(frame, notice1);
 		
-		//if(activeQueens.size() <=)
-		/*if(is){
-			noMoreThan8++;
-			if(isNot){
-				noMoreThan8--;
-			}
-		}
-		if(noMoreThan8==8){
-			JOptionPane.showMessageDialog(null, "Error!, No more than 8 Queens can be placed.");
-			return true;
-		}
-		return false;*/
+	
 		return false;
 	}//end of checkVisibility
 	
