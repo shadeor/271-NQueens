@@ -36,6 +36,8 @@ public class Run extends JFrame{
 	private boolean is = true;
 	private boolean isNot = false;
 	
+	int num;
+	
 	JFrame frame = new JFrame();
 	
 	private static String[][] nqueenBoard = new String[][]{
@@ -48,7 +50,9 @@ public class Run extends JFrame{
 		{"A7", "B7", "C7", "D7", "E7", "F7", "G7", "H7"},
 		{"A8", "B8", "C8", "D8", "E8", "F8", "G8", "H8"}};
 		
-	private static ArrayList<String> activeQueens = new ArrayList<String>();
+		private static ArrayList<String> activeQueensList = new ArrayList<String>();
+		private static Object[] activeQueens = new Object[8];
+		
 		
 
 	
@@ -57,7 +61,8 @@ public class Run extends JFrame{
 		Run nQueens = new Run();
 		nQueens.setVisible(true);
 		
-		 System.out.println(activeQueens);
+		// System.out.println(activeQueens);
+		System.out.println(Arrays.toString(activeQueens));
 		
 		
 	}//End of main
@@ -228,12 +233,17 @@ public class Run extends JFrame{
 			 
 			                // if selected print selected in console
 			                if (state == ItemEvent.SELECTED) {
-			                	if((activeQueens.size() <= 7)) {
+			                	if((activeQueensList.size() <= 7)) {
 			                    System.out.println("Selected " + cover.getName());
 			                    panel.setVisible(true);
 								panel.revalidate();
-								activeQueens.add(cover.getName());
-								System.out.println(activeQueens);
+								
+								activeQueensList.add(cover.getName());
+								num = Character.getNumericValue(cover.getName().charAt(1));
+								System.out.println("number " + num);
+								activeQueens[num - 1] = cover.getName();
+					
+								System.out.println(Arrays.toString(activeQueens));
 			                	}else {
 			                		JOptionPane.showMessageDialog(null, "Error!, No more than 8 Queens can be placed.");
 			                	}
@@ -245,8 +255,10 @@ public class Run extends JFrame{
 			                    System.out.println("Deselected " + cover.getName());
 			                    panel.setVisible(false);
 								panel.revalidate();
-								activeQueens.remove(cover.getName());
-								 System.out.println(activeQueens);
+								num = Character.getNumericValue(cover.getName().charAt(1));
+								activeQueens[num - 1] = null;
+								activeQueensList.remove(cover.getName());
+								System.out.println(Arrays.toString(activeQueens));
 			                }
 			            }
 			        });
@@ -264,7 +276,7 @@ public class Run extends JFrame{
 	public boolean checkSolution(){
 		JLabel notice1;
 		
-		if(activeQueens.size() < 8 ) {
+		if(activeQueensList.size() < 8 ) {
 		notice1 = new JLabel("You must first place 8 Queens on the board.");
 		}else {
 		notice1 = new JLabel("Solution is incorrect, Please Try again.");
